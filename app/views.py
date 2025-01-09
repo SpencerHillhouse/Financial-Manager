@@ -14,6 +14,7 @@ from .decorators import unathenticated_user, allowed_users, admin_only
 
 # Create your views here.
 # This is a test.
+# This is also a test.
 
 @login_required(login_url='login')
 @admin_only
