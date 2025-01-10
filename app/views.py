@@ -9,18 +9,18 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import Group
 
 from .models import *
-from .forms import CreateUserForm
+from .forms import *
 from .decorators import unathenticated_user, allowed_users, admin_only
 
 # Create your views here.
-# This is a test.
-# This is also a test.
+
 
 @login_required(login_url='login')
 @admin_only
 def home(request):
     profile = Profile.objects.all()
-    return render(request, 'accounts/dashboard.html', {'profile':profile})
+    account = SavingsAccount.objects.all()
+    return render(request, 'accounts/dashboard.html', {'profile':profile, 'account':account})
 
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['accountholder'])
@@ -32,11 +32,17 @@ def userPage(request):
 
 
 @login_required(login_url='login')
-@allowed_users(allowed_roles=['accountholder'])
+# @allowed_users(allowed_roles=['accountholder'])
 def transactionPage(request):
-    transactions = Transaction.objects.all()
+    # transactions = Transaction.objects.all()
+    transactions = request.user.profile.transaction_set.all()
+    account = request.user.profile.savingsaccount_set.all()
+    # balance = account.objects.get.all()
+    print("Transactions: ", transactions)
+    print("Account: ", account)
+    # print("Balance: ", balance)
     
-    return render(request, 'accounts/transactions.html', {'transactions':transactions}) 
+    return render(request, 'accounts/transactions.html', {'transactions':transactions, 'account':account}) 
 
 
 @unathenticated_user
@@ -78,3 +84,11 @@ def registerPage(request):
             return redirect('login')
     context = {'form' :form}
     return render(request, 'accounts/register.html', context)
+
+def create_transaction(request):
+    form = CreateTransactionForm()
+    if request.method == 'POST':
+        print('Printing POST:', request.POST)
+        
+    context={'form': form}
+    return render(request, 'accounts/create_transaction_form.html', context)

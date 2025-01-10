@@ -12,12 +12,12 @@ class Profile(models.Model):
     def __str__(self):
         return self.name
 
-# class SavingsAccount(models.Model):
-#     balance = models.DecimalField(max_digits=12, decimal_places=2)
-#     user = models.ForeignKey(Profile, on_delete=models.CASCADE)
-
-#     def __str__(self):
-#         return self.user.name
+class SavingsAccount(models.Model):
+    user = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    balance = models.DecimalField(max_digits=12, decimal_places=2)
+    
+    def __str__(self):
+        return self.user.name
     
 class Transaction(models.Model):
     TRANSACTION_TYPES = (
@@ -35,14 +35,33 @@ class Transaction(models.Model):
     def __str__(self):
         return self.description
     
+def create_profile( name, phone, email):
+    profile_to_create = Profile(name=name, phone=phone, email=email)
+    profile_to_create.save()
+    return profile_to_create
 
+def creaet_savings_account(user, balance):
+    if not user:
+        raise ValueError
+    else:
+        savings_account_to_create = SavingsAccount(user=user, balance=balance)
+        savings_account_to_create.save()
+        return savings_account_to_create
     
-# def create_transaction(user, amount, transaction_type, description):
-#     user = Transaction.objects.get(user=user)
-#     transaction_to_create = Transaction(user=user, amount=amount, transaction_type = transaction_type, description=description)
-#     if transaction_to_create.transaction_type == 'withdraw':
-#         transaction_to_create.balance -= transaction_to_create.amount
-#     else:
-#         transaction_to_create.balance += transaction_to_create.amount
-#     transaction_to_create.save()
-#     return transaction_to_create
+
+def create_transaction(profileuser, amount, transaction_type, description):
+    
+    if not profileuser:
+        raise ValueError
+    else:
+        transaction_to_create = Transaction(profileuser=profileuser, amount=amount, transaction_type = transaction_type, description=description)
+        account_to_get = SavingsAccount.objects.get(user=profileuser)
+        if transaction_to_create.transaction_type == 'withdraw':
+            account_to_get.balance = account_to_get.balance - transaction_to_create.amount
+        else:
+            account_to_get.balance += transaction_to_create.amount
+        account_to_get.save()
+        print(f"Balance: {account_to_get.balance}")
+        transaction_to_create.save()
+        return transaction_to_create
+    

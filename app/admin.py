@@ -4,5 +4,5 @@ from .models import *
 
 
 admin.site.register(Profile)
-# admin.site.register(SavingsAccount)
+admin.site.register(SavingsAccount)
 admin.site.register(Transaction)
