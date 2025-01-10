@@ -15,3 +15,8 @@ class CreateTransactionForm(ModelForm):
     class Meta:
         model = Transaction
         fields = ['amount', 'transaction_type', 'description']
+
+class NewUserForm(ModelForm):
+    class Meta:
+        model = Profile
+        fields = ['name', 'phone',]

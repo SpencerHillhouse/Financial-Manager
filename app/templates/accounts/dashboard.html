@@ -20,7 +20,9 @@
                 <tr>
                 <td>{{i.name}}</td>
                 {% for a in account %}
+                {% if i.name == a.user.name %}
                 <td>{{a.balance}}</td>
+                {% endif %}
                 {% endfor %}
                 </tr>
                 {% endfor %}

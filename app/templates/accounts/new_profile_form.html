@@ -4,8 +4,9 @@
 <form action="" method="POST">
     {% csrf_token %}
     {{form}}
-    <input type="hidden" value="{{request.user.id}}" name="user_profile_id">
-
+    <!-- <input type = "hidden" value="{{request.user.id}}" name="user_profile_id"> -->
+    
+    
 
     <input type="submit" name="Submit">
 </form>
