@@ -1,9 +1,12 @@
-{% extends "accounts/main.html" %}
+{% extends "accounts/main.html" %} {% block content%}
 
-{% block content%}
+<br />
 
-<h1>Account Holder Page</h1>
+<h1>Welcome, {{user.first_name}}</h1>
 
+<br />
 
-{% endblock %}
-
+<!-- <input type = "hidden" value="{{request.user.id}}" name="user_profile_id"> -->
+{% comment %}
+<h3>Balance: {{user.balance}}</h3>
+{% endcomment %} {% endblock %}

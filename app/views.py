@@ -38,8 +38,10 @@ def home(request):
 @allowed_users(allowed_roles=['accountholder'])
 def userPage(request):
     profile = Profile.objects.all()
+    print(profile)
+    account = SavingsAccount.objects.all()
     content = {}
-    return render(request, 'accounts/user.html', {'profile':profile})
+    return render(request, 'accounts/user.html', {'profile':profile, 'account':account})
 
 
 @login_required(login_url='login')
