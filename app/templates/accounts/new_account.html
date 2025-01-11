@@ -1,0 +1,19 @@
+{% extends 'accounts/main.html' %} {% block content %}
+<form action="" method="POST">
+
+    <p>
+        What would you like your new accounts starting balance to be:
+      </p>
+        <br />
+  {% csrf_token %} 
+  {{form}}
+  <input type="hidden" value="{{request.user.id}}" name="user_profile_id" />
+
+  <br>
+
+  
+    <input type="submit" name="Submit" />
+  </p>
+</form>
+
+{% endblock %}

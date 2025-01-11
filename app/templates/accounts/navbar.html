@@ -1,37 +1,50 @@
 {% load static %}
 
-
 <style>
-  .hello-msg{
-    font-size :18 px;
+  .hello-msg {
+    font-size: 18 px;
     color: #fff;
-    margin-right: 20px
+    margin-right: 20px;
   }
 </style>
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="#">Navbar</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav">
-        <li class="nav-item active">
-          <a class="nav-link" href="{% url 'home' %}">Dashboard</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'transaction-page' %}">Transactions</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'create_transaction' %}">New Transaction</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'create_profile' %}">New Account</a>
-        </li>
-      </ul>
-    </div>
+  <!-- <a class="navbar-brand" href="#">Navbar</a> -->
+  <button
+    class="navbar-toggler"
+    type="button"
+    data-toggle="collapse"
+    data-target="#navbarNav"
+    aria-controls="navbarNav"
+    aria-expanded="false"
+    aria-label="Toggle navigation"
+  >
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'home' %}">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'transaction-page' %}">Transactions</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'create_transaction' %}"
+          >New Transaction</a
+        >
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'create_account' %}">New Account</a>
+      </li>
+      {% comment %}
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'create_profile' %}">New Account</a>
+      </li>
+      {% endcomment %}
+    </ul>
+  </div>
 
-    <span class="hello-msg">Hello, {{request.user}}</span>
-    <span><a class="hello-msg" href="{% url 'logout' %}">Logout</a></span>
-
-  </nav>
+  <span class="hello-msg">Hello, {{request.user}}</span>
+  <span><a class="hello-msg" href="{% url 'logout' %}">Logout</a></span>
+</nav>

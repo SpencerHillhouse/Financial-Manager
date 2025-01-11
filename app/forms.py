@@ -9,7 +9,7 @@ from .models import *
 class CreateUserForm(UserCreationForm):
     class Meta:
         model = User
-        fields = ['username', 'email', 'password1', 'password2']
+        fields = ['username', 'email', 'password1', 'password2', 'first_name']
 
 class CreateTransactionForm(ModelForm):
     class Meta:
@@ -19,4 +19,9 @@ class CreateTransactionForm(ModelForm):
 class NewUserForm(ModelForm):
     class Meta:
         model = Profile
-        fields = ['name', 'phone',]
+        fields = ['user']
+
+class NewAccountForm(ModelForm):
+    class Meta:
+        model = SavingsAccount
+        fields = ['balance']

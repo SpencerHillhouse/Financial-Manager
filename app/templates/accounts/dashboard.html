@@ -1,35 +1,35 @@
-{% extends "accounts/main.html" %}
+{% extends "accounts/main.html" %} {% block content%}
 
-{% block content%}
-
-
-<br>
+<br />
 
 <div class="row">
-    <div class="col-md">
-        <div class="card card-body">
-            <h5>Transactions</h5>
-        </div>
-        <div class="card card-body">
-            <table class="table">
-                <tr>
-                    <th>Customers</th>
-                    <th>Balance</th>
-                </tr>
-                {% for i in profile %}
-                <tr>
-                <td>{{i.name}}</td>
-                {% for a in account %}
-                {% if i.name == a.user.name %}
-                <td>{{a.balance}}</td>
-                {% endif %}
-                {% endfor %}
-                </tr>
-                {% endfor %}
-                
-            </table>
-        </div>
-
+  <div class="col-md">
+    <div class="card card-body">
+      <h5>Transactions</h5>
     </div>
+    <div class="card card-body">
+      <table class="table">
+        <tr>
+          <th>Customers</th>
+          <th>Balance</th>
+          <th>Delete Account</th>
+        </tr>
+        {% for i in profile %}
+        <tr>
+          <td>{{i.first_name}}</td>
+          {% for a in account %} {% if i.first_name == a.user.user.first_name %}
+          <td>{{a.balance}}</td>
+          {% endif %} {% endfor %}
+          <td>
+            <a class="btn btn-sm btn-danger" href="{% url 'delete_user' i.id %}"
+              >Delete</a
+            >
+          </td>
+        </tr>
+        {% endfor %}
+      </table>
+    </div>
+  </div>
 
-{% endblock %}
+  {% endblock %}
+</div>
