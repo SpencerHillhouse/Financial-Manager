@@ -130,14 +130,18 @@ def delete_user(request,pk):
     print(user)
     context = {'profile':profile}
     if profile.user == user:
-        user.delete()
         return render(request, 'accounts/delete_user.html', context)
     else:
-        print("REEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE")
+        print("It broke but it shouldn't have help")
         
+    # return redirect('home')
+
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['admin'])
+def remove_user(request,pk):
+    user = User.objects.get(id=pk)
+    user.delete()    
     return redirect('home')
-
-
 
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['accountholder'])

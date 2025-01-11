@@ -12,4 +12,5 @@ urlpatterns = [
     # path('create_profile/', views.create_profile, name="create_profile"),
     path('delete_user/<str:pk>/', views.delete_user, name="delete_user"),
     path('create_account/', views.create_account, name="create_account"),
+    path('delete_user/<str:pk>/confirmed', views.remove_user, name="remove_user"),
 ]
